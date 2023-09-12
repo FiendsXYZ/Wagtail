@@ -16,12 +16,17 @@ Wagtail is a basic C# Windows GUI application designed to interact seamlessly wi
 
 ---
 
-## Installation
-
-To get started, follow these steps:
-
-1. Clone repo
-2. Make sure you have .NET SDK installed
-3. dotenv run/dotnet publish -c Release -r win-x64 --self-contained true to compile local exe
-4. Insert API/voice key via config button or .env before building
-5. Profit
+<!-- Frontend Technologies -->
+<h4 align="center" style="font-family: 'Poppins', sans-serif;"></h4>
+<table align="center">
+  <tr>
+    <td style="text-align: center; filter: invert(1);"><img src="https://seeklogo.com/images/C/c-sharp-c-logo-02F17714BA-seeklogo.com.png" alt="C Sharp logo" width="45" height="55"/></td>
+    <td style="text-align: center; filter: invert(1);"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Microsoft_.NET_logo.svg/2048px-Microsoft_.NET_logo.svg.png" alt=".NET logo" width="55" height="55"/></td>
+    <td style="text-align: center;"><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Eleven_Labs.png" alt="11Labs" width="65" height="50"/></td>
+  </tr>
+  <tr style="font-family: 'Poppins', sans-serif; text-align: center;">
+    <td style="text-align: center;">C#</td>
+        <td style="text-align: center;">.NET</td>
+    <td style="text-align: center;">11Labs</td>
+  </tr>
+</table>
