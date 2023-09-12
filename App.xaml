@@ -1,0 +1,45 @@
+﻿<Application x:Class="wagtail.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:wagtail"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- Global Window Style -->
+            <Style TargetType="{x:Type Window}">
+                <Setter Property="Background" Value="#1E1E1E"/>
+            </Style>
+            
+            <!-- Global TextBlock Style -->
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="#FFFFFF"/>
+            </Style>
+            
+            <!-- Global TextBox Style -->
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Background" Value="#333333"/>
+                <Setter Property="Foreground" Value="#FFFFFF"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="#444444"/>
+                <Setter Property="CaretBrush" Value="#FFFFFF"/>
+            </Style>
+
+            <!-- Global Button Style -->
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#2E8B57"/>
+                <Setter Property="Foreground" Value="#FFFFFF"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="#1E1E1E"/>
+                <Setter Property="Padding" Value="10"/>
+            </Style>
+
+            <!-- Global ListView Style -->
+            <Style TargetType="{x:Type ListView}">
+                <Setter Property="Background" Value="#333333"/>
+                <Setter Property="Foreground" Value="#FFFFFF"/>
+            </Style>
+
+            <!-- Add more global styles here -->
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

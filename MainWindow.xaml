@@ -1,0 +1,75 @@
+﻿<Window x:Class="wagtail.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Wagtail" Height="300" Width="600"
+    Background="#222222">
+
+    <Window.Resources>
+        <!-- Local Styles -->
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="#333333" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="#444444" />
+            <Setter Property="Height" Value="30" />
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#555555" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="Height" Value="30" />
+        </Style>
+
+        <Style TargetType="{x:Type ListView}">
+            <Setter Property="Background" Value="#333333" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+        </Style>
+
+        <!-- Custom Style for ListViewItem -->
+        <Style TargetType="{x:Type ListViewItem}">
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#5a005a" /> <!-- Dark Purple -->
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Added Style for GridViewColumnHeader -->
+        <Style TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Background" Value="#333333" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <TextBox Name="InputTextBox" Width="300" Margin="10,10,0,0" Height="50"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" GotFocus="InputTextBox_GotFocus"
+            LostFocus="InputTextBox_LostFocus" Foreground="White" Text="Please enter TTS prompt..." />
+        <Button Content="Download" Width="100" Margin="0,10,110,0" HorizontalAlignment="Right"
+            VerticalAlignment="Top" Click="OnDownloadClick" />
+        <Button Content="Config" Width="100" Margin="0,10,10,0" HorizontalAlignment="Right"
+            VerticalAlignment="Top" Click="OnConfigClick" />
+        <ListView Name="FileListView" Margin="10,50,10,50"
+            MouseDoubleClick="FileListView_MouseDoubleClick"
+            PreviewMouseLeftButtonDown="FileListView_PreviewMouseLeftButtonDown"
+            MouseMove="FileListView_MouseMove">
+            <ListView.View>
+                <GridView AllowsColumnReorder="False">
+                    <GridViewColumn Header="File Name" DisplayMemberBinding="{Binding FileName}"
+                        Width="560" />
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Open File Location" Click="OpenFileLocation_Click" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+        <MediaElement Name="MediaPlayer" LoadedBehavior="Manual" MediaEnded="MediaPlayer_MediaEnded" />
+        <Button Name="PlayButton" Content="Play" Width="100" Margin="10,0,0,10"
+            HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="PlayFile_Click" />
+        <Button Content="Folder" Width="100" Margin="0,0,10,10" HorizontalAlignment="Right"
+            VerticalAlignment="Bottom" Click="OpenFileLocation_Click" />
+    </Grid>
+</Window>
