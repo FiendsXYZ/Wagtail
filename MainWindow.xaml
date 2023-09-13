@@ -69,6 +69,8 @@
         <MediaElement Name="MediaPlayer" LoadedBehavior="Manual" MediaEnded="MediaPlayer_MediaEnded" />
         <Button Name="PlayButton" Content="Play" Width="100" Margin="10,0,0,10"
             HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="PlayFile_Click" />
+            <Label Name="StatusLabel" Content="Status: Ready" Width="300" Margin="250,20,0,0"
+             VerticalAlignment="Bottom" Foreground="White" />
         <Button Content="Folder" Width="100" Margin="0,0,10,10" HorizontalAlignment="Right"
             VerticalAlignment="Bottom" Click="OpenFileLocation_Click" />
     </Grid>

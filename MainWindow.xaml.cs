@@ -86,6 +86,9 @@ namespace wagtail
 
         private async void OnDownloadClick(object sender, RoutedEventArgs e)
         {
+            StatusLabel.Content = "Status: Checking configuration...";
+            StatusLabel.Foreground = new SolidColorBrush(Colors.White);
+
             // Check if environment variables are set
             string? apiKey = Environment.GetEnvironmentVariable("XI_API_KEY");
             string? voiceId = Environment.GetEnvironmentVariable("VOICE_ID");
@@ -99,10 +102,11 @@ namespace wagtail
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning
                 );
+                StatusLabel.Content = "Status: Configuration missing.";
                 return;
             }
 
-            string sanitizedInput = SanitizeFileName(InputTextBox.Text); // Use InputTextBox.Text 
+            string sanitizedInput = SanitizeFileName(InputTextBox.Text); // Use InputTextBox.Text
             string filePath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
                 "Downloads",
@@ -118,6 +122,8 @@ namespace wagtail
 
             string requestJson = JsonSerializer.Serialize(requestData);
 
+            StatusLabel.Content = "Status: Preparing to download...";
+            StatusLabel.Foreground = new SolidColorBrush(Colors.White);
             using (HttpClient httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Add("Accept", "audio/mpeg");
@@ -136,14 +142,14 @@ namespace wagtail
                         MessageBoxButton.OK,
                         MessageBoxImage.Error
                     );
+                    StatusLabel.Content = "Status: Download failed.";
                     return;
                 }
-
+                StatusLabel.Content = "Status: Downloading...";
                 byte[] mp3Data = await response.Content.ReadAsByteArrayAsync();
-
                 File.WriteAllBytes(filePath, mp3Data);
             }
-
+            StatusLabel.Content = "Status: Download complete.";
             FileListView.Items.Add(
                 new FileItem { FileName = $"{sanitizedInput}.mp3", FilePath = filePath }
             );
@@ -239,6 +245,16 @@ namespace wagtail
         private void LoadEnvironmentVariables()
         {
             DotNetEnv.Env.Load();
+
+            (string apiKey, string voiceId) = ConfigHelper.LoadConfig();
+            Log($"Loaded API Key: {apiKey}");
+            Log($"Loaded Voice ID: {voiceId}");
+
+            if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(voiceId))
+            {
+                Environment.SetEnvironmentVariable("XI_API_KEY", apiKey);
+                Environment.SetEnvironmentVariable("VOICE_ID", voiceId);
+            }
         }
 
         //////////////////////////////////////////
@@ -260,6 +276,27 @@ namespace wagtail
             }
         }
 
+        //////////////////////////////////////////
+        // Helper method to log messages to log.txt
+        private const string LogFilePath = "log.txt";
+
+        private void Log(string message)
+        {
+            try
+            {
+                File.AppendAllText(LogFilePath, $"{DateTime.Now}: {message}\n");
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that occur while logging (e.g., disk full, permissions issues)
+                MessageBox.Show(
+                    $"An error occurred while logging: {ex.Message}",
+                    "Logging Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            }
+        }
         //////////////////////////////////////////
     }
 }
