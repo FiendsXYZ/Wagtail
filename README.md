@@ -18,6 +18,11 @@ Wagtail is a basic C# Windows GUI application designed to interact seamlessly wi
 
 <!-- Frontend Technologies -->
 <h4 align="center" style="font-family: 'Poppins', sans-serif;"></h4>
+<p style="font-weight: bold;">
+  dotnet publish -c Release -r win-x64 --self-contained true
+</p>
+
+<br/><br/><br/>
 <table align="center">
   <tr>
     <td style="text-align: center; filter: invert(1);"><img src="https://seeklogo.com/images/C/c-sharp-c-logo-02F17714BA-seeklogo.com.png" alt="C Sharp logo" width="45" height="55"/></td>
@@ -30,3 +35,6 @@ Wagtail is a basic C# Windows GUI application designed to interact seamlessly wi
     <td style="text-align: center;">11Labs</td>
   </tr>
 </table>
+
+
+
